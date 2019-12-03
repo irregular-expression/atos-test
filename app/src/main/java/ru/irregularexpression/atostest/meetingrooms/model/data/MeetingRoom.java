@@ -1,14 +1,11 @@
 package ru.irregularexpression.atostest.meetingrooms.model.data;
 
-import java.util.List;
-
 public class MeetingRoom {
 
     private String name;
     private String description;
     private String earliestTime;
     private int chairsCount;
-    //private List<Order> orders;
     private boolean projector;
     private boolean board;
 
@@ -35,14 +32,6 @@ public class MeetingRoom {
     public void setChairsCount(int chairsCount) {
         this.chairsCount = chairsCount;
     }
-
-    //public List<Order> getOrders() {
-    //    return orders;
-    //}
-
-    //public void setOrders(List<Order> orders) {
-    //    this.orders = orders;
-    //}
 
     public boolean hasProjector() {
         return projector;

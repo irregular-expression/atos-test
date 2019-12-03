@@ -1,18 +1,12 @@
 package ru.irregularexpression.atostest.meetingrooms.model;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
-import java.util.Random;
 import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
@@ -30,7 +24,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.irregularexpression.atostest.meetingrooms.R;
 import ru.irregularexpression.atostest.meetingrooms.di.ForApplication;
 import ru.irregularexpression.atostest.meetingrooms.interfaces.MeetingRoomApi;
 import ru.irregularexpression.atostest.meetingrooms.model.data.Order;
@@ -109,7 +102,9 @@ public class DataManager {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
+    /**
+     * Handling all api calls.
+     */
     public <T extends ServerResponse> T callApi(Call<T> call, T response) {
         try {
             Response<T> r = call.execute();

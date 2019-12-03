@@ -1,15 +1,11 @@
 package ru.irregularexpression.atostest.meetingrooms.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +35,6 @@ public class RoomDataActivity extends BaseActivity<RoomDataPresenter> implements
     ActivityRoomdataBinding binder;
     @Inject RoomDataContract.Presenter roomDataPresenter;
     private OrdersAdapter ordersAdapter;
-
-    private static String orderName;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

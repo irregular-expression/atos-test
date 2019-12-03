@@ -10,6 +10,10 @@ import java.util.HashSet;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
+/**
+ * Unused until server doesn't use cookies.
+ */
+
 public class RecievedCookiesInterceptor implements Interceptor {
 
     private Context context;

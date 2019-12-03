@@ -20,7 +20,6 @@ import ru.irregularexpression.atostest.meetingrooms.databinding.ActivityNewOrder
 import ru.irregularexpression.atostest.meetingrooms.interfaces.contracts.CreateOrderContract;
 import ru.irregularexpression.atostest.meetingrooms.model.data.Order;
 import ru.irregularexpression.atostest.meetingrooms.model.mockservice.MockService;
-import ru.irregularexpression.atostest.meetingrooms.utils.ErrorHandler;
 
 public class CreateOrderActivity extends BaseActivity implements CreateOrderContract.View, DatePickerDialog.OnDateSetListener {
 
@@ -123,13 +122,11 @@ public class CreateOrderActivity extends BaseActivity implements CreateOrderCont
 
     @Override
     public void doOnSuccess() {
-          //send notification
+        //send notification to app bar after 5 seconds
         Intent intent = new Intent(this, MockService.class);
         intent.putExtra("error", 0);
         startService(intent);
         finish();
-        //showErrorAlert(getString(R.string.mock_order_is_sent_title), getString(R.string.mock_order_is_sent));
-
     }
 
     @Override

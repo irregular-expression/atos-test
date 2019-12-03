@@ -27,7 +27,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
                 .setCancelable(true);
         builder.setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg1) {
                     }
                 });

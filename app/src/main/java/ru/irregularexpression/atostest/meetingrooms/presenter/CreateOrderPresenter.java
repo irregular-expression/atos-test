@@ -1,17 +1,13 @@
 package ru.irregularexpression.atostest.meetingrooms.presenter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import ru.irregularexpression.atostest.meetingrooms.interfaces.contracts.CreateOrderContract;
 import ru.irregularexpression.atostest.meetingrooms.model.DataManager;
 import ru.irregularexpression.atostest.meetingrooms.model.data.Order;
 import ru.irregularexpression.atostest.meetingrooms.model.web.OrderCreateResponse;
-import ru.irregularexpression.atostest.meetingrooms.model.web.OrdersResponse;
 import ru.irregularexpression.atostest.meetingrooms.utils.ErrorHandler;
 
 public class CreateOrderPresenter extends BasePresenter implements CreateOrderContract.Presenter {

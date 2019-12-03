@@ -37,7 +37,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         final OrderViewHolder orderViewHolder = (OrderViewHolder) viewHolder;
         final Order order = data.get(i);
-        orderViewHolder.user.setText(order.getUsername().split(" ")[0] + " " + order.getUsername().split(" ")[1]); //TODO: clean this
+        orderViewHolder.user.setText(order.getUsername().split(" ")[0] + " " + order.getUsername().split(" ")[1]); //TODO: needs refactoring and clearing requirements for username format
         orderViewHolder.date.setText(order.getStringDate());
         orderViewHolder.time.setText(context.getString(R.string.order_time_template, order.getStringTimeStart(), order.getStringTimeEnd()));
     }

@@ -14,12 +14,16 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ru.irregularexpression.atostest.meetingrooms.R;
 
+
+/**
+ * In real app here should be a FCMService class or some alternative solution
+ * to handle push notifications from the server. This app isn't integrated with Firebase, so it'll be a mock class.
+ */
 public class MockService extends Service {
     final String LOG_TAG = "myLogs";
 
@@ -44,6 +48,9 @@ public class MockService extends Service {
         return null;
     }
 
+    /**
+     * Waits 5 seconds, then send notification.
+     */
     void mockTask() {
         Completable c = Completable.fromRunnable(new Runnable() {
             public void run() {
@@ -54,12 +61,7 @@ public class MockService extends Service {
                     e.printStackTrace();
                 }
 
-                if (error == 0) {
-                    sendNotification(getApplicationContext().getString(R.string.mock_manager_accept_title), getApplicationContext().getString(R.string.mock_manager_accept));
-                } else {
-                    sendNotification(getApplicationContext().getString(R.string.mock_manager_decline_title), getApplicationContext().getString(R.string.mock_manager_decline));
-                }
-                stopSelf();
+
             }
         });
         c.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
@@ -70,7 +72,12 @@ public class MockService extends Service {
 
             @Override
             public void onComplete() {
-
+                if (error == 0) {
+                    sendNotification(getApplicationContext().getString(R.string.mock_manager_accept_title), getApplicationContext().getString(R.string.mock_manager_accept));
+                } else {
+                    sendNotification(getApplicationContext().getString(R.string.mock_manager_decline_title), getApplicationContext().getString(R.string.mock_manager_decline));
+                }
+                stopSelf();
             }
 
             @Override
@@ -82,7 +89,6 @@ public class MockService extends Service {
 
     }
 
-    //TODO: move to service
     public void sendNotification(String message, String title) {
         int notificationId = new Random().nextInt(60000);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

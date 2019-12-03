@@ -1,7 +1,5 @@
 package ru.irregularexpression.atostest.meetingrooms.interfaces.contracts;
 
-import java.util.List;
-
 import ru.irregularexpression.atostest.meetingrooms.model.data.Order;
 
 public interface CreateOrderContract {
