@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meeting Rooms</string>
+    <!-- New design text resources -->
+    <string name="copyright_text">© AtoS Test. 2019. Все права защищены.</string>
+    <string name="login_btn_text">Войти в систему</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_login">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="error_empty">Пустое поле!</string>
+    <string name="error_empty_password">Введите пароль!</string>
+    <string name="error_login_required">Введите логин!</string>
+    <string name="web_progress">Соединение с сервером&#8230;</string>
+
+    <!-- Activity's Titles -->
+    <string name="title_activity_main">@string/app_name</string>
+    <string name="room_name_template">Комната %s</string>
+    <string name="room_chair_count_template">%d мест</string>
+    <string name="room_free">Свободно</string>
+    <string name="projector">Проектор</string>
+    <string name="board">Маркерная доска</string>
+    <string name="reserved_time">Зарезервированное время:</string>
+    <string name="room_places_description">В комнате %d мест</string>
+    <string name="reserve_button_text">Забронировать</string>
+    <string name="order_time_template">%s - %s</string>
+    <string name="default_order_name">Моё мероприятие</string>
+    <string name="order_dialog_title">Название мероприятия</string>
+    <string name="button_ok">ОК</string>
+    <string name="button_cancel">Отмена</string>
+
+    <string name="default_date">00.00.0000</string>
+    <string name="order_date_description">Укажите дату</string>
+    <string name="default_time">00:00</string>
+    <string name="order_time_description">Укажите время</string>
+    <string name="default_author">username</string>
+    <string name="order_author_description">Автор</string>
+
+
+
+    <string name="room_type_training">Переговорная для проведения обучающих тренингов сотрудников</string>
+    <string name="room_type_conference_hall">Конференц-зал для бизнес-совещаний</string>
+    <string name="room_type_default">Переговорная комната</string>
+
+    <string name="empty_rooms_list_placeholder">Нет комнат.</string>
+
+    <string name="error_default">Ошибка</string>
+    <string name="error">Ошибка %d</string>
+    <string name="error_unknown">Неизвестная ошибка!</string>
+    <string name="error_no_such_user">Нет пользователя с таким логином. Вы зарегистрированы?</string>
+    <string name="error_wrong_password">Некорректный пароль!</string>
+    <string name="error_no_internet">Нет соединения с Интернетом.</string>
+    <string name="error_no_server_connection">Нет соединения с сервером.</string>
+    <string name="error_internal_server">Технические неполадки на сервере.</string>
+
+    <!-- Mock manager answer -->
+    <string name="mock_manager_accept">Одобрено</string>
+    <string name="mock_manager_accept_title">Менеджер одобрил вашу заявку.</string>
+    <string name="mock_manager_decline">Отклонено</string>
+    <string name="mock_manager_decline_title">Заявка отклонена: время уже занято.</string>
+    <string name="mock_order_is_sent">Заявка отправлена менеджеру.</string>
+    <string name="mock_order_is_sent_title">Отправлено</string>
+</resources>

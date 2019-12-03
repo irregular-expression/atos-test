@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meeting Rooms</string>
+    <!-- New design text resources -->
+    <string name="copyright_text">© AtoS Test. 2019. All rights reserved.</string>
+    <string name="login_btn_text">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_login">Your login</string>
+    <string name="prompt_password">Your password</string>
+    <string name="action_sign_in">Go</string>
+    <string name="web_progress">Connecting to server&#8230;</string>
+
+    <!-- Activity's Titles -->
+    <string name="title_activity_main">@string/app_name</string>
+
+    <string name="empty_rooms_list_placeholder">No rooms found.</string>
+    <string name="room_name_template">Room %s</string>
+    <string name="room_chair_count_template">%d chairs</string>
+    <string name="room_free">Free</string>
+    <string name="projector">Projector</string>
+    <string name="board">Board</string>
+    <string name="reserved_time">Reserved time:</string>
+    <string name="room_places_description">There\'re %d places in the room</string>
+    <string name="reserve_button_text">Reserve</string>
+    <string name="order_time_template">%s - %s</string>
+
+    <string name="default_order_name">My reserved time</string>
+    <string name="order_dialog_title">Enter the event name</string>
+    <string name="default_date">00.00.0000</string>
+    <string name="order_date_description">Enter the date</string>
+    <string name="default_time">00:00</string>
+    <string name="order_time_description">Enter the time</string>
+    <string name="default_author">username</string>
+    <string name="order_author_description">Author</string>
+
+
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+
+    <string name="room_type_training">Meeting room for staff training</string>
+    <string name="room_type_conference_hall">Conference hall for business meeting</string>
+    <string name="room_type_default">Meeting room</string>
+
+    <!-- Error messages -->
+    <string name="error_default">Error</string>
+    <string name="error">Error %d</string>
+    <string name="error_empty">Field should not be empty!</string>
+    <string name="error_empty_password">Password should not be empty!</string>
+    <string name="error_login_required">Login required!</string>
+    <string name="error_unknown">Unknown error!</string>
+    <string name="error_no_such_user">No user with such login was found! Are you registered?</string>
+    <string name="error_wrong_password">Wrong password!</string>
+    <string name="error_no_internet">No connection to Internet!</string>
+    <string name="error_no_server_connection">No connection to server!</string>
+    <string name="error_internal_server">Server error occured!</string>
+
+    <!-- Mock manager answer -->
+    <string name="mock_manager_accept">Accepted</string>
+    <string name="mock_manager_accept_title">Manager accepts your order.</string>
+    <string name="mock_manager_decline">Declined</string>
+    <string name="mock_manager_decline_title">Manager declined your order. Time is already taken.</string>
+    <string name="mock_order_is_sent">Your order is sent to manager</string>
+    <string name="mock_order_is_sent_title">Sent</string>
+
+</resources>

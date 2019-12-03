@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/room_card"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/colorAccentDark"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="3dp"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Комната 000"/>
+        <TextView
+            android:id="@+id/chair_count"
+            android:layout_below="@id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45 мест"/>
+        <TextView
+            android:id="@+id/earliest_time"
+            android:layout_below="@id/chair_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time 10:00 - 16:00"/>
+        <ImageView
+            android:id="@+id/projector"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:src="@drawable/ic_projector_24dp"/>
+        <ImageView
+            android:id="@+id/board"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/projector"
+            android:visibility="invisible"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_board_24dp"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
