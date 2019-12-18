@@ -35,6 +35,7 @@ import ru.irregularexpression.atostest.meetingrooms.model.web.OrdersResponse;
 import ru.irregularexpression.atostest.meetingrooms.model.web.ServerResponse;
 import ru.irregularexpression.atostest.meetingrooms.utils.Constants;
 import ru.irregularexpression.atostest.meetingrooms.utils.ErrorHandler;
+import ru.irregularexpression.atostest.meetingrooms.utils.RoomType;
 import ru.irregularexpression.atostest.meetingrooms.utils.okhttp.OfflineResponseInterceptor;
 
 public class DataManager {
@@ -134,71 +135,54 @@ public class DataManager {
 
 
     public Observable<ServerResponse> getLoginActionObservable(final String login, final String password) {
-        return Observable.fromCallable(new Callable<ServerResponse>() {
-            @Override
-            public ServerResponse call() throws Exception {
+        return Observable.fromCallable(() -> {
                 AuthorizationResponse response = callApi(getApi().getSession(login, password), new AuthorizationResponse());
                 if (response.isSuccess()) {
                     repository.logout();
                     repository.login(new User(response.getName(), login, password, true));
                 }
-                return (ServerResponse) response;
-            }
+                return response;
         });
     }
 
     public Observable<MeetingRoomsResponse> getRoomsObservable() {
-        return Observable.fromCallable(new Callable<MeetingRoomsResponse>() {
-            @Override
-            public MeetingRoomsResponse call() throws Exception {
-                return callApi(getApi().getRooms(), new MeetingRoomsResponse());
-            }
+        return Observable.fromCallable(() -> callApi(getApi().getRooms(), new MeetingRoomsResponse()));
+    }
+
+    public Observable<ServerResponse> getTestUserDataObservable() {
+        return Observable.fromCallable(() -> {
+             ServerResponse response = callApi(getApi().createUser("user", "12345", "Ivanov Ivan"), new ServerResponse());
+             if (!response.isSuccess()) return response;
+             response = callApi(getApi().createRoom("3.2424", RoomType.TRAINING, 38, true, false), new ServerResponse());
+             if (!response.isSuccess()) return response;
+             response = callApi(getApi().createRoom("2.1425", RoomType.CONFERENCE_HALL, 12, true, true), new ServerResponse());
+             if (!response.isSuccess()) return response;
+             response = callApi(getApi().createRoom("1.9425", RoomType.DEFAULT, 20, false, true), new ServerResponse());
+             return response;
         });
     }
 
     public Observable<OrdersResponse> getOrdersObservable(final String room) {
-        return Observable.fromCallable(new Callable<OrdersResponse>() {
-            @Override
-            public OrdersResponse call() throws Exception {
-                return callApi(getApi().getOrders(room), new OrdersResponse());
-            }
-        });
+        return Observable.fromCallable(() -> callApi(getApi().getOrders(room), new OrdersResponse()));
     }
 
     public Observable<User> getActiveUserObservable() {
-        return Observable.fromCallable(new Callable<User>() {
-            @Override
-            public User call() throws Exception {
-                return repository.getActiveUser();
-            }
-        });
+        return Observable.fromCallable(repository::getActiveUser);
     }
 
     public Observable<Order> getDefaultOrderObservable(String roomName) {
-        return Observable.fromCallable(new Callable<Order>() {
-            @Override
-            public Order call() throws Exception {
+        return Observable.fromCallable(() -> {
                 User user = repository.getActiveUser();
                 Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
                 long start = calendar.getTimeInMillis();
                 calendar.add(Calendar.HOUR_OF_DAY, 1);
                 long end = calendar.getTimeInMillis();
                 return new Order(roomName, start, end, user.getLogin(), user.getName(), "Моё мероприятие");
-            }
         });
     }
 
     public Observable<OrderCreateResponse> sendOrderObservable(final Order order) {
-        return Observable.fromCallable(new Callable<OrderCreateResponse>() {
-            @Override
-            public OrderCreateResponse call() throws Exception {
-                return callApi(getApi().createOrder(order), new OrderCreateResponse());
-            }
-        });
+        return Observable.fromCallable(() -> callApi(getApi().createOrder(order), new OrderCreateResponse()));
     }
-
-
-
-
-
 }

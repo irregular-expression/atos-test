@@ -8,9 +8,11 @@ import android.view.View;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.Timepoint;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
 
@@ -46,13 +48,15 @@ public class CreateOrderActivity extends BaseActivity implements CreateOrderCont
             }
         });
         binder.date.setOnClickListener((view) -> {
-            Calendar now = Calendar.getInstance();
+            Calendar tomorrow = Calendar.getInstance();
+            tomorrow.add(Calendar.DAY_OF_MONTH, 1);
             DatePickerDialog dpd = DatePickerDialog.newInstance(
                     CreateOrderActivity.this,
-                    now.get(Calendar.YEAR), // Initial year selection
-                    now.get(Calendar.MONTH), // Initial month selection
-                    now.get(Calendar.DAY_OF_MONTH) // Inital day selection
+                    tomorrow.get(Calendar.YEAR), // Initial year selection
+                    tomorrow.get(Calendar.MONTH), // Initial month selection
+                    tomorrow.get(Calendar.DAY_OF_MONTH) // Inital day selection
             );
+            dpd.setMinDate(tomorrow);
             dpd.show(getFragmentManager(), "Datepickerdialog");
         });
         binder.timeStart.setOnClickListener((view) -> {
@@ -68,7 +72,7 @@ public class CreateOrderActivity extends BaseActivity implements CreateOrderCont
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
                 createOrderPresenter.getOrder().setTimeStart(calendar.getTimeInMillis());
-             };
+            };
             TimePickerDialog tpd = TimePickerDialog.newInstance(callback,
                     now.get(Calendar.HOUR_OF_DAY),
                     now.get(Calendar.MINUTE),
@@ -111,7 +115,7 @@ public class CreateOrderActivity extends BaseActivity implements CreateOrderCont
 
     @Override
     public void doOnFailure(int error) {
-           //send notification
+        //send notification
         Intent intent = new Intent(this, MockService.class);
         intent.putExtra("error", error);
         startService(intent);
@@ -160,12 +164,7 @@ public class CreateOrderActivity extends BaseActivity implements CreateOrderCont
     }
 
     private boolean validateInput() {
-        if (binder.name.getText().toString().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
-
+        return !binder.name.getText().toString().equals("");
     }
 
     @Override

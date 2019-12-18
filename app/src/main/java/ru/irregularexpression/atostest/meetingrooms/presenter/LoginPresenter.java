@@ -74,6 +74,31 @@ public class LoginPresenter extends BasePresenter implements LoginContract.Prese
     }
 
     @Override
+    public void createDemoSession() {
+        running = true;
+        dataManager.addDisposableObserver(dataManager.getTestUserDataObservable(), new DisposableObserver<ServerResponse>() {
+            @Override
+            public void onNext(ServerResponse serverResponse) {
+                if (serverResponse.isSuccess()) {
+                    mView.showTestUserCredentials();
+                } else {
+                    mView.doOnFailure(serverResponse.getError());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.doOnFailure(ErrorHandler.Error.UNKNOWN_ERROR);
+            }
+
+            @Override
+            public void onComplete() {
+                 running = false;
+            }
+        });
+    }
+
+    @Override
     public void onDestroy() {
          dataManager.clearTasks();
     }

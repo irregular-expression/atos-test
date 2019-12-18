@@ -29,13 +29,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         ((MeetingRoomsApp) getApplication()).getAppComponent().inject(this);
         loginPresenter.setView(this);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        binder.signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binder.signInButton.setOnClickListener((v) -> {
                 showProgress();
                 setProgressText(getString(R.string.web_progress));
                 attemptLogin();
-            }
+        });
+
+        binder.testRegistrationButton.setOnClickListener((v) -> {
+            showProgress();
+            setProgressText(getString(R.string.web_progress));
+            runDemoSession();
         });
 
         if (savedInstanceState != null) {
@@ -67,6 +70,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         } else {
             hideProgress();
         }
+    }
+
+    public void runDemoSession() {
+        loginPresenter.createDemoSession();
     }
 
     public void attemptLogin() {
@@ -119,6 +126,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         } else {
             hideProgress();
         }
+    }
+
+    @Override
+    public void showTestUserCredentials() {
+        setProgressText("");
+        hideProgress();
+        showErrorAlert(getString(R.string.test_user_credentials_title), getString(R.string.test_user_credentials_message));
     }
 
     @Override

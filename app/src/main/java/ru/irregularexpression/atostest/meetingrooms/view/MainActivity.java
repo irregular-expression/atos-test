@@ -43,16 +43,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mainPresenter.setView(this);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binder.navView.setNavigationItemSelectedListener(this);
-        binder.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mainPresenter.loadRoomsList();
-            }
-        });
+        binder.swiperefresh.setOnRefreshListener(() -> mainPresenter.loadRoomsList());
+
 
         binder.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binder.recyclerview.addItemDecoration(new MarginItemDecoration(getResources().getInteger(R.integer.recycler_view_item_margin)));
-        meetingRoomAdapter = new MeetingRoomAdapter(new ArrayList<MeetingRoom>(), this);
+        meetingRoomAdapter = new MeetingRoomAdapter(new ArrayList<>(), this);
         meetingRoomAdapter.publisher.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(getClickedRoomObserver());
         binder.recyclerview.setAdapter(meetingRoomAdapter);
 
@@ -125,8 +121,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 getString(ErrorHandler.getErrorTextResourse(error)));
     }
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();

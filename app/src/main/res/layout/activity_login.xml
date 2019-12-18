@@ -110,6 +110,19 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 />
+
+            <Button
+                android:id="@+id/test_registration_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:textSize="@dimen/main_text_size"
+                android:text="@string/testreg_btn_text"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccentSecond"
+                />
         </LinearLayout>
     </RelativeLayout>
 

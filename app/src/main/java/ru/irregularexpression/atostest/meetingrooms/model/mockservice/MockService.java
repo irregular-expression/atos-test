@@ -8,6 +8,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ru.irregularexpression.atostest.meetingrooms.R;
+import ru.irregularexpression.atostest.meetingrooms.view.RoomDataActivity;
 
 
 /**
@@ -28,6 +30,7 @@ public class MockService extends Service {
     final String LOG_TAG = "myLogs";
 
     public int error;
+    private Context context;
 
     public void onCreate() {
         super.onCreate();
@@ -35,6 +38,7 @@ public class MockService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         error = intent.getIntExtra("error", -1);
+        context = this;
         mockTask();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -52,17 +56,12 @@ public class MockService extends Service {
      * Waits 5 seconds, then send notification.
      */
     void mockTask() {
-        Completable c = Completable.fromRunnable(new Runnable() {
-            public void run() {
+        Completable c = Completable.fromRunnable(() -> {
                 try {
-                    TimeUnit.SECONDS.sleep(5);
-
+                    TimeUnit.SECONDS.sleep(6);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
-            }
         });
         c.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
@@ -74,6 +73,8 @@ public class MockService extends Service {
             public void onComplete() {
                 if (error == 0) {
                     sendNotification(getApplicationContext().getString(R.string.mock_manager_accept_title), getApplicationContext().getString(R.string.mock_manager_accept));
+                    Intent intent = new Intent(RoomDataActivity.REFRESH_ORDERS);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 } else {
                     sendNotification(getApplicationContext().getString(R.string.mock_manager_decline_title), getApplicationContext().getString(R.string.mock_manager_decline));
                 }

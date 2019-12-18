@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">Meeting Rooms</string>
     <!-- New design text resources -->
-    <string name="copyright_text">© AtoS Test. 2019. Все права защищены.</string>
+    <string name="copyright_text">© TestApp. 2019. Все права защищены.</string>
     <string name="login_btn_text">Войти в систему</string>
-
+    <string name="testreg_btn_text">Создать демо-аккаунт</string>
     <!-- Strings related to login -->
     <string name="prompt_login">Логин</string>
     <string name="prompt_password">Пароль</string>
@@ -13,9 +13,11 @@
     <string name="error_empty_password">Введите пароль!</string>
     <string name="error_login_required">Введите логин!</string>
     <string name="web_progress">Соединение с сервером&#8230;</string>
-
+    <string name="test_user_credentials_message">Логин: user\nПароль: 12345</string>
+    <string name="test_user_credentials_title">Демо-сессия создана</string>
     <!-- Activity's Titles -->
     <string name="title_activity_main">@string/app_name</string>
+    <string name="change_user">Сменить пользователя</string>
     <string name="room_name_template">Комната %s</string>
     <string name="room_chair_count_template">%d мест</string>
     <string name="room_free">Свободно</string>
@@ -47,6 +49,7 @@
 
     <string name="error_default">Ошибка</string>
     <string name="error">Ошибка %d</string>
+    <string name="error_past_datetime">Вы не можете забронировать время в прошлом.</string>
     <string name="error_unknown">Неизвестная ошибка!</string>
     <string name="error_no_such_user">Нет пользователя с таким логином. Вы зарегистрированы?</string>
     <string name="error_wrong_password">Некорректный пароль!</string>

@@ -10,6 +10,7 @@ import ru.irregularexpression.atostest.meetingrooms.model.web.AuthorizationRespo
 import ru.irregularexpression.atostest.meetingrooms.model.web.MeetingRoomsResponse;
 import ru.irregularexpression.atostest.meetingrooms.model.web.OrderCreateResponse;
 import ru.irregularexpression.atostest.meetingrooms.model.web.OrdersResponse;
+import ru.irregularexpression.atostest.meetingrooms.model.web.ServerResponse;
 
 public interface MeetingRoomApi {
     @GET("auth")
@@ -23,5 +24,15 @@ public interface MeetingRoomApi {
 
     @POST("reserveRoom")
     Call<OrderCreateResponse> createOrder(@Body Order order);
+
+    /*
+    for demo data creating
+    */
+
+    @GET("createUser")
+    Call<ServerResponse> createUser(@Query("login") String login, @Query("password") String password, @Query("name") String name);
+
+    @GET("createRoom")
+    Call<ServerResponse> createRoom(@Query("name") String name, @Query("description") String description, @Query("chairsCount") Integer chairsCount, @Query("projector") Boolean projector, @Query("board") Boolean board);
 
 }

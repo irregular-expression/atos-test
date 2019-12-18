@@ -1,9 +1,12 @@
 package ru.irregularexpression.atostest.meetingrooms.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -36,6 +39,19 @@ public class RoomDataActivity extends BaseActivity<RoomDataPresenter> implements
     @Inject RoomDataContract.Presenter roomDataPresenter;
     private OrdersAdapter ordersAdapter;
 
+    public static final String REFRESH_ORDERS = "ru.irregularexpression.atostest.meetingrooms.REFRESH_ORDERS";
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(REFRESH_ORDERS)) {
+                showProgress();
+                roomDataPresenter.loadOrders();
+            }
+        }
+    };
+    LocalBroadcastManager broadcastManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,34 +65,20 @@ public class RoomDataActivity extends BaseActivity<RoomDataPresenter> implements
         roomDataPresenter.restoreRoomName(getIntent().getStringExtra(KEY_ROOM_NAME));
         getSupportActionBar().setTitle(getString(R.string.room_name_template, roomDataPresenter.getRestoredRoomName()));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        binder.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        binder.toolbar.setNavigationOnClickListener((v) -> onBackPressed());
 
         binder.roomChairCountDescription.setText(getString(R.string.room_places_description, getIntent().getIntExtra(KEY_CHAIR_COUNT,0)));
         binder.roomTypeDescription.setText(StringUtils.getRoomDescription(getIntent().getStringExtra(KEY_ROOM_TYPE),this));
 
-        binder.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-              roomDataPresenter.loadOrders();
-            }
-        });
-
+        binder.swiperefresh.setOnRefreshListener(()-> roomDataPresenter.loadOrders());
         binder.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binder.recyclerview.addItemDecoration(new MarginItemDecoration(getResources().getInteger(R.integer.recycler_view_item_margin)));
-        ordersAdapter = new OrdersAdapter(new ArrayList<Order>(), this);
+        ordersAdapter = new OrdersAdapter(new ArrayList<>(), this);
         binder.recyclerview.setAdapter(ordersAdapter);
-        binder.reserveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binder.reserveButton.setOnClickListener((v) -> {
                 Intent intent = new Intent(getApplicationContext(), CreateOrderActivity.class);
                 intent.putExtra(KEY_ROOM_NAME, roomDataPresenter.getRestoredRoomName());
                 startActivity(intent);
-            }
         });
 
 
@@ -92,6 +94,22 @@ public class RoomDataActivity extends BaseActivity<RoomDataPresenter> implements
             roomDataPresenter.loadOrders();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(REFRESH_ORDERS);
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        broadcastManager.unregisterReceiver(broadcastReceiver);
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -135,4 +153,5 @@ public class RoomDataActivity extends BaseActivity<RoomDataPresenter> implements
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

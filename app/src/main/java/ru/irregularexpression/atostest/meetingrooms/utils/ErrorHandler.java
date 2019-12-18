@@ -20,6 +20,7 @@ public class ErrorHandler {
         public static final int NO_SERVER_CONNECTION = 2001;
         public static final int INCORRECT_SERVER_RESPONSE = 2002;
         public static final int SOCKET_TIMEOUT_EXCEPTION = 2204;
+        public static final int DATE_FROM_PAST = 2300;
 
         //HTTP errors
         public static final int HTTP_BAD_REQUEST = 400;
@@ -84,6 +85,8 @@ public class ErrorHandler {
                 return R.string.error_no_internet;
             case Error.HTTP_INTERNAL_SERVER_ERROR:
                 return R.string.error_internal_server;
+            case Error.DATE_FROM_PAST:
+                return R.string.error_past_datetime;
             case Error.UNKNOWN_ERROR:
             default:
                 return R.string.error_unknown;

@@ -2,18 +2,20 @@
 <resources>
     <string name="app_name">Meeting Rooms</string>
     <!-- New design text resources -->
-    <string name="copyright_text">© AtoS Test. 2019. All rights reserved.</string>
+    <string name="copyright_text">© TestApp. 2019. All rights reserved.</string>
     <string name="login_btn_text">Login</string>
-
+    <string name="testreg_btn_text">Create demo-account</string>
     <!-- Strings related to login -->
     <string name="prompt_login">Your login</string>
     <string name="prompt_password">Your password</string>
     <string name="action_sign_in">Go</string>
     <string name="web_progress">Connecting to server&#8230;</string>
-
+    <string name="test_user_credentials_message">Login: user\nPassword: 12345</string>
+    <string name="test_user_credentials_title">Demo-session is created</string>
     <!-- Activity's Titles -->
     <string name="title_activity_main">@string/app_name</string>
 
+    <string name="change_user">Logout</string>
     <string name="empty_rooms_list_placeholder">No rooms found.</string>
     <string name="room_name_template">Room %s</string>
     <string name="room_chair_count_template">%d chairs</string>
@@ -46,6 +48,7 @@
     <string name="error_default">Error</string>
     <string name="error">Error %d</string>
     <string name="error_empty">Field should not be empty!</string>
+    <string name="error_past_datetime">You can\'t order date or time from past.</string>
     <string name="error_empty_password">Password should not be empty!</string>
     <string name="error_login_required">Login required!</string>
     <string name="error_unknown">Unknown error!</string>
@@ -53,7 +56,7 @@
     <string name="error_wrong_password">Wrong password!</string>
     <string name="error_no_internet">No connection to Internet!</string>
     <string name="error_no_server_connection">No connection to server!</string>
-    <string name="error_internal_server">Server error occured!</string>
+    <string name="error_internal_server">Server error occurred!</string>
 
     <!-- Mock manager answer -->
     <string name="mock_manager_accept">Accepted</string>
